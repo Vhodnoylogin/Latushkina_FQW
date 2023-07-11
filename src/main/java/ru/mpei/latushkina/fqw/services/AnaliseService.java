@@ -3,10 +3,10 @@ package ru.mpei.latushkina.fqw.services;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import ru.mpei.parser.model.MetaInf;
-import ru.mpei.parser.model.dto.FaultData;
-import ru.mpei.parser.model.measurement.ThreeMeasData;
-import ru.mpei.parser.repository.MeasurementsRepository;
+import ru.mpei.latushkina.fqw.models.MetaInf;
+import ru.mpei.latushkina.fqw.models.dto.FaultData;
+import ru.mpei.latushkina.fqw.models.measurement.ThreeMeasData;
+import ru.mpei.latushkina.fqw.repository.MeasurementsRepository;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ public class AnaliseService {
     public FaultData analiseMeas(long id, String phA, String phB, String phC, double stock) {
         if (stock < 1) stock = 1;
 
-        return analise(measurementsRepository.getThreeMeas(id, phA, phB, phC),
+        return this.analise(measurementsRepository.getThreeMeas(id, phA, phB, phC),
                 measurementsRepository.getMetaInf(id).orElseThrow(),
                 stock);
     }
@@ -49,12 +49,14 @@ public class AnaliseService {
         faultData.setSet(set);
         log.debug("setting {}", set);
 
-        faultData.setNormalCurrent(new ThreeMeasData(
-                measurements.get(start).getTime(),
-                measurements.get(start).getPhA(),
-                measurements.get(start).getPhB(),
-                measurements.get(start).getPhC()
-        ));
+        faultData.setNormalCurrent(
+                new ThreeMeasData(
+                        measurements.get(start).getTime(),
+                        measurements.get(start).getPhA(),
+                        measurements.get(start).getPhB(),
+                        measurements.get(start).getPhC()
+                )
+        );
 
         int faultMoment = -1;
         StringBuilder fault = new StringBuilder();

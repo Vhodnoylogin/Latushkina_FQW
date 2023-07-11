@@ -12,7 +12,6 @@ import org.springframework.web.multipart.MultipartFile;
 import ru.mpei.latushkina.fqw.services.ComtradeService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200/")
 @Slf4j
 public class ComtradeController {
     private final ComtradeService comtradeService;
