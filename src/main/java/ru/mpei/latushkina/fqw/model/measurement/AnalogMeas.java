@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AnalogMeas {
-    double val;
     private String name;
+    private double val;
 }

@@ -176,11 +176,13 @@ public class ComtradeService {
 
             List<AnalogMeas> analogMeas = new ArrayList<>();
             for (AnalogCfg ac : cfg.getAnalogChannels()) {
-                analogMeas.add(new AnalogMeas(
-                        ac.getChannelId(),
-                        (ParserUtil.bArrTo16Int(bytes, i) * ac.getA() + ac.getB()) *
-                                (ac.getValue() == AnalogCfg.Value.S ? ac.getPrimary() / ac.getSecondary() : 1)
-                ));
+                analogMeas.add(
+                        new AnalogMeas(
+                                ac.getChannelId(),
+                                (ParserUtil.bArrTo16Int(bytes, i) * ac.getA() + ac.getB()) *
+                                        (ac.getValue() == AnalogCfg.Value.S ? ac.getPrimary() / ac.getSecondary() : 1)
+                        )
+                );
                 i = i + 2;
             }
             meas.setAnalogMeas(analogMeas);

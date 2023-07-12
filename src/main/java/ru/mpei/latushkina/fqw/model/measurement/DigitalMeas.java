@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class DigitalMeas {
-    boolean val;
     private String name;
+    private boolean val;
 }
