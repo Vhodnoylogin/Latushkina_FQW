@@ -6,8 +6,9 @@ import org.springframework.web.bind.annotation.*;
 import ru.mpei.latushkina.fqw.models.dto.FaultData;
 import ru.mpei.latushkina.fqw.services.AnaliseService;
 
-@RestController
 @Slf4j
+@RestController
+@RequestMapping("/data/analise")
 public class AnaliseController {
 
     private final AnaliseService analiseService;
@@ -17,7 +18,7 @@ public class AnaliseController {
         this.analiseService = analiseService;
     }
 
-    @GetMapping("/data/analise/{id}")
+    @GetMapping("/{id}")
     public FaultData analiseMeas(@PathVariable Long id,
                                  @RequestParam String phAName,
                                  @RequestParam String phBName,
