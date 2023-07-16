@@ -39,6 +39,7 @@ public class ChartPointMapping implements DtoEntityMapper<List<ChartPoint>, List
                         ))
                 )
                 .map(x -> new ChartPointEntity(
+                        null,
                         x.getFirst().getName(),
                         x.getSecond().getTime(),
                         x.getSecond().getValue()

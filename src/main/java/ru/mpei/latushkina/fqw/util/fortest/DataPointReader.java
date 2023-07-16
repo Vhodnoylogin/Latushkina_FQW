@@ -21,6 +21,7 @@ public class DataPointReader {
             var list = br.lines()
                     .map(x -> x.split(","))
                     .map(x -> new ChartPointEntity(
+                            null,
                             x[0].trim(),
                             Double.parseDouble(x[1].trim()),
                             Double.parseDouble(x[2].trim())
