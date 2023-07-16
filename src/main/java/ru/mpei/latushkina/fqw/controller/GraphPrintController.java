@@ -34,16 +34,6 @@ public class GraphPrintController {
         this.graphService = graphService;
     }
 
-//    @GetMapping("/print")
-//    public ResponseEntity<String> printGraph(@RequestParam String[] sources){
-//        var sourceList = Arrays.stream(sources).map(Source::new).toList();
-//        var res = graphService.getGraphPointsBySource(sourceList);
-//
-//        return ResponseEntity
-//                .status(HttpStatus.OK)
-//                .body(HTML.formatted(res));
-//    }
-
     @GetMapping("/print")
     public ResponseEntity<String> printGraphByTime(
             @RequestParam(defaultValue = "-1.0") double timeBegin,

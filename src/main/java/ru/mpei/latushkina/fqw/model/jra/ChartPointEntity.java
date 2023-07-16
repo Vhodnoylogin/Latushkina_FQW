@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "chart_point")
+@Table(name = "${mydb.tables.chart-point-table-name}")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,9 +15,7 @@ public class ChartPointEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String source;
-//    @Column(columnDefinition = "DOUBLE")
-private Double time;
-    //    @Column(columnDefinition = "DOUBLE")
+    private Double time;
     @Column(name = "value_column")
     private Double value;
 }

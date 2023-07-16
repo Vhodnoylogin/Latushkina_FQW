@@ -6,11 +6,12 @@ import ru.mpei.latushkina.fqw.model.dto.point.ChartPoint;
 import ru.mpei.latushkina.fqw.model.dto.point.Source;
 import ru.mpei.latushkina.fqw.persistence.ChartPointMapping;
 import ru.mpei.latushkina.fqw.repository.ChartPointRepository;
+import ru.mpei.latushkina.fqw.service.graph.interfaces.GraphPoints;
 
 import java.util.List;
 
 @Service
-public class ExtractPointsService implements IGraphPoints<List<ChartPoint>> {
+public class ExtractPointsService implements GraphPoints<List<ChartPoint>> {
     private final ChartPointMapping chartPointMapping;
     private final ChartPointRepository chartPointRepository;
 

@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 import ru.mpei.latushkina.fqw.model.dto.point.ChartPoint;
 import ru.mpei.latushkina.fqw.model.dto.point.Source;
 import ru.mpei.latushkina.fqw.service.fourier.FourierFilterService;
+import ru.mpei.latushkina.fqw.service.graph.interfaces.GraphPoints;
 
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
@@ -24,7 +25,7 @@ import java.util.Map;
 
 @Slf4j
 @Service
-public class GraphService implements IGraphPoints<String> {
+public class GraphService implements GraphPoints<String> {
     private final ExtractPointsService extractPointsService;
     private final FourierFilterService fourierFilterService;
 
@@ -32,6 +33,12 @@ public class GraphService implements IGraphPoints<String> {
     private final Integer pictureWidth = 500;
     @Value("${graph.picture.height}")
     private final Integer pictureHeight = 500;
+    @Value("${graph.picture.title}")
+    private final String graphTitle = "FWQ";
+    @Value("${graph.picture.axis-x}")
+    private final String axisX = "Время";
+    @Value("${graph.picture.axis-y}")
+    private final String axisY = "Время";
 
     @Autowired
     public GraphService(ExtractPointsService extractPointsService, FourierFilterService fourierFilterService) {
@@ -85,18 +92,18 @@ public class GraphService implements IGraphPoints<String> {
         listOfSeries.forEach(x -> mapOfSeries
                 .put(x.getKey().toString(), x)
         );
-        listOfSeries.forEach(x -> log.info("{}", x.getKey().toString()));
+//        listOfSeries.forEach(x -> log.info("{}", x.getKey().toString()));
         for (ChartPoint chartPoint : dataset) {
-            var series = mapOfSeries.get(chartPoint.getSource().getName());
+            var series = mapOfSeries.get(chartPoint.getSource().getDescription());
             chartPoint.getPoints().forEach(x -> series.add(x.getTime(), x.getValue()));
         }
         XYSeriesCollection ds = new XYSeriesCollection();
         listOfSeries.forEach(ds::addSeries);
 
         JFreeChart chart = ChartFactory.createXYLineChart(
-                "График",
-                "Время",
-                "Значение",
+                graphTitle,
+                axisX,
+                axisY,
                 ds,
                 PlotOrientation.VERTICAL,
                 true,
