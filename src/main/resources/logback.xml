@@ -33,4 +33,6 @@
 
     <logger name="org.hibernate.engine.internal.StatisticalLoggingSessionEventListener" level="OFF"/>
 
+    <logger name="org.hibernate.SQL" level="OFF"/>
+
 </configuration>
