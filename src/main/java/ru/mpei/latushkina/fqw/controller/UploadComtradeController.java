@@ -14,11 +14,11 @@ import ru.mpei.latushkina.fqw.service.comtrade.ComtradeUploadService;
 @Slf4j
 @RestController
 @RequestMapping("/api/v1/data/comtrade")
-public class UploadComtrade {
+public class UploadComtradeController {
     private final ComtradeUploadService comtradeUploadService;
 
     @Autowired
-    public UploadComtrade(ComtradeUploadService comtradeUploadService) {
+    public UploadComtradeController(ComtradeUploadService comtradeUploadService) {
         this.comtradeUploadService = comtradeUploadService;
     }
 

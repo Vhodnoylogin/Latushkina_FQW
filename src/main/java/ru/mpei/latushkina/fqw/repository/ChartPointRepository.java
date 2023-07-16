@@ -8,11 +8,15 @@ import java.util.List;
 
 @Repository
 public interface ChartPointRepository extends JpaRepository<ChartPointEntity, Long> {
-    List<ChartPointEntity> findBySource(String source);
+//    List<ChartPointEntity> findBySource(String source);
 
-    List<ChartPointEntity> findBySourceAndTimeBetween(String source, Double t1, Double t2);
+//    List<ChartPointEntity> findBySourceAndTimeBetween(String source, Double t1, Double t2);
 
     List<ChartPointEntity> findBySourceIn(List<String> source);
 
-    List<ChartPointEntity> findBySourceInAndTimeBetween(List<String> source, Double t1, Double t2);
+    List<ChartPointEntity> findBySourceInAndTimeBetween(List<String> source, Double timeBegin, Double timeEnd);
+
+    List<ChartPointEntity> findBySourceAndTimeGreaterThan(String source, Double time);
+
+    List<ChartPointEntity> findBySourceAndTimeLessThan(String source, Double time);
 }
