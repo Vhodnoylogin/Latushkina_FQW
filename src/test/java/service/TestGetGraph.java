@@ -10,7 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.mpei.latushkina.fqw.FqwApplicationWOServer;
 import ru.mpei.latushkina.fqw.model.dto.point.Source;
-import ru.mpei.latushkina.fqw.service.ComtradeUploadService;
+import ru.mpei.latushkina.fqw.service.comtrade.ComtradeUploadService;
 import ru.mpei.latushkina.fqw.service.graph.GraphService;
 
 import java.io.File;

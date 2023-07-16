@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 import ru.mpei.latushkina.fqw.FqwApplicationWOServer;
 import ru.mpei.latushkina.fqw.model.dto.point.ChartPoint;
-import ru.mpei.latushkina.fqw.service.ComtradeUploadService;
+import ru.mpei.latushkina.fqw.service.comtrade.ComtradeUploadService;
 
 @Slf4j
 @ExtendWith(SpringExtension.class)

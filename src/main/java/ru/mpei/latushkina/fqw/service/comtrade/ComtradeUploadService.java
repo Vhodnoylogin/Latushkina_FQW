@@ -1,4 +1,4 @@
-package ru.mpei.latushkina.fqw.service;
+package ru.mpei.latushkina.fqw.service.comtrade;
 
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;

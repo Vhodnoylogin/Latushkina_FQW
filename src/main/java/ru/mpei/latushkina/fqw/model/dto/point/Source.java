@@ -7,4 +7,8 @@ import lombok.Data;
 @AllArgsConstructor
 public class Source {
     private String name;
+
+    public String getDescription() {
+        return name;
+    }
 }
