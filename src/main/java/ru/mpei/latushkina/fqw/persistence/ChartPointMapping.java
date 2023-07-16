@@ -2,10 +2,10 @@ package ru.mpei.latushkina.fqw.persistence;
 
 import org.springframework.data.util.Pair;
 import org.springframework.stereotype.Component;
+import ru.mpei.latushkina.fqw.model.dto.point.ChartPoint;
+import ru.mpei.latushkina.fqw.model.dto.point.Point;
+import ru.mpei.latushkina.fqw.model.dto.point.Source;
 import ru.mpei.latushkina.fqw.model.jra.ChartPointEntity;
-import ru.mpei.latushkina.fqw.model.point.ChartPoint;
-import ru.mpei.latushkina.fqw.model.point.Point;
-import ru.mpei.latushkina.fqw.model.point.Source;
 import ru.mpei.latushkina.fqw.persistence.common.DtoEntityMapper;
 
 import java.util.ArrayList;

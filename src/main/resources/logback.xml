@@ -31,4 +31,6 @@
         <appender-ref ref="console"/>
     </logger>
 
+    <logger name="org.hibernate.engine.internal.StatisticalLoggingSessionEventListener" level="OFF"/>
+
 </configuration>

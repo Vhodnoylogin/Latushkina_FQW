@@ -2,8 +2,8 @@ package ru.mpei.latushkina.fqw.util.fortest;
 
 import lombok.SneakyThrows;
 import org.springframework.core.io.ClassPathResource;
+import ru.mpei.latushkina.fqw.model.dto.point.ChartPoint;
 import ru.mpei.latushkina.fqw.model.jra.ChartPointEntity;
-import ru.mpei.latushkina.fqw.model.point.ChartPoint;
 import ru.mpei.latushkina.fqw.persistence.ChartPointMapping;
 
 import java.io.BufferedReader;

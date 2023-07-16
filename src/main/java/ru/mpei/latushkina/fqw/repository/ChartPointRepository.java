@@ -12,5 +12,7 @@ public interface ChartPointRepository extends JpaRepository<ChartPointEntity, Lo
 
     List<ChartPointEntity> findBySourceAndTimeBetween(String source, Double t1, Double t2);
 
-//    List<ChartPointEntity> saveAll(List<ChartPointEntity> chartPoints);
+    List<ChartPointEntity> findBySourceIn(List<String> source);
+
+    List<ChartPointEntity> findBySourceInAndTimeBetween(List<String> source, Double t1, Double t2);
 }

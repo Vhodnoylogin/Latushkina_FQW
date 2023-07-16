@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import ru.mpei.latushkina.fqw.model.point.ChartPoint;
+import ru.mpei.latushkina.fqw.model.dto.point.ChartPoint;
 import ru.mpei.latushkina.fqw.persistence.ChartPointMapping;
 import ru.mpei.latushkina.fqw.repository.ChartPointRepository;
 import ru.mpei.latushkina.fqw.util.fortest.DataPointReader;

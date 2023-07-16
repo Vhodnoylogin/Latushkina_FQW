@@ -13,6 +13,9 @@ public class ChartPointEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String source;
-    private Double time;
+//    @Column(columnDefinition = "DOUBLE")
+private Double time;
+    //    @Column(columnDefinition = "DOUBLE")
+    @Column(name = "value_column")
     private Double value;
 }
