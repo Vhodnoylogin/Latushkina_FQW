@@ -18,10 +18,8 @@ import ru.mpei.latushkina.fqw.service.graph.interfaces.GraphPoints;
 import java.awt.*;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.Base64;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Slf4j
 @Service
@@ -39,6 +37,11 @@ public class GraphService implements GraphPoints<String> {
     private final String axisX = "Время";
     @Value("${graph.picture.axis-y}")
     private final String axisY = "Время";
+
+    @Value("${graph.type.origin}")
+    private final Boolean printOrigin = true;
+    @Value("${graph.type.rms}")
+    private final Boolean printRMS = true;
 
     @Autowired
     public GraphService(ExtractPointsService extractPointsService, FourierFilterService fourierFilterService) {
@@ -77,11 +80,15 @@ public class GraphService implements GraphPoints<String> {
         return base64Chart;
     }
 
-    private JFreeChart getChart(List<ChartPoint> dataset) {
-        dataset = fourierFilterService.applyFilter(dataset);
+    private JFreeChart getChart(List<ChartPoint> inputDataset) {
+        var datasetRMS = fourierFilterService.applyFilter(inputDataset);
+
+        List<ChartPoint> unionDataset = new ArrayList<>();
+        if (printOrigin) unionDataset.addAll(inputDataset);
+        if (printRMS) unionDataset.addAll(datasetRMS);
 
         var listOfSeries =
-                dataset.stream()
+                unionDataset.stream()
                         .map(ChartPoint::getSource)
                         .map(Source::getDescription)
                         .distinct()
@@ -93,7 +100,7 @@ public class GraphService implements GraphPoints<String> {
                 .put(x.getKey().toString(), x)
         );
 //        listOfSeries.forEach(x -> log.info("{}", x.getKey().toString()));
-        for (ChartPoint chartPoint : dataset) {
+        for (ChartPoint chartPoint : unionDataset) {
             var series = mapOfSeries.get(chartPoint.getSource().getDescription());
             chartPoint.getPoints().forEach(x -> series.add(x.getTime(), x.getValue()));
         }
