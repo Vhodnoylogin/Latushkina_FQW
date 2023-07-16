@@ -71,7 +71,7 @@ public class GraphService implements IGraphPoints<String> {
     }
 
     private JFreeChart getChart(List<ChartPoint> dataset) {
-        dataset = fourierFilterService.applyFilter(dataset, 5.0);
+        dataset = fourierFilterService.applyFilter(dataset);
 
         var listOfSeries =
                 dataset.stream()

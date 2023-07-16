@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class FourierFilterService {
     @Value("${fourier.filter.cutoff-frequency}")
-    private final Integer pictureHeight = 500;
+    private final double cutOffFrequency = 5.;
 
     private static Complex[] applyFourierTransform(double[] values) {
         var transformer = new FastFourierTransformer(DftNormalization.STANDARD);
@@ -93,7 +93,7 @@ public class FourierFilterService {
         return Arrays.stream(res).toList();
     }
 
-    public List<ChartPoint> applyFilter(List<ChartPoint> points, double cutOffFrequency) {
+    public List<ChartPoint> applyFilter(List<ChartPoint> points) {
         return points.stream()
                 .map(x -> new ChartPoint(
                         new Source(x.getSource().getDescription() + "_RMS"),
