@@ -27,7 +27,7 @@ public class UploadComtradeController {
     public ResponseEntity<String> upload(
             @RequestParam MultipartFile cfg,
             @RequestParam MultipartFile dat) {
-        log.info("get two file {} {}",
+        log.debug("get two file {} {}",
                 cfg.getOriginalFilename(),
                 dat.getOriginalFilename()
         );
