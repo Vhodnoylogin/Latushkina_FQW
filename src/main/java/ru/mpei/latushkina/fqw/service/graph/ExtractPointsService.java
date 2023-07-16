@@ -1,4 +1,4 @@
-package ru.mpei.latushkina.fqw.service;
+package ru.mpei.latushkina.fqw.service.graph;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,12 +10,12 @@ import ru.mpei.latushkina.fqw.repository.ChartPointRepository;
 import java.util.List;
 
 @Service
-public class GraphPointsService {
+public class ExtractPointsService implements IGraphPoints<List<ChartPoint>> {
     private final ChartPointMapping chartPointMapping;
     private final ChartPointRepository chartPointRepository;
 
     @Autowired
-    public GraphPointsService(ChartPointMapping chartPointMapping, ChartPointRepository chartPointRepository) {
+    public ExtractPointsService(ChartPointMapping chartPointMapping, ChartPointRepository chartPointRepository) {
         this.chartPointMapping = chartPointMapping;
         this.chartPointRepository = chartPointRepository;
     }

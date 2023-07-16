@@ -9,9 +9,6 @@ import java.io.File;
 
 @Slf4j
 public class DataPointReaderTest {
-    private static final String filePath = "test/source/src.csv";
-
-
     @Test
     @SneakyThrows
     public void testReadFileAndPrint() {
