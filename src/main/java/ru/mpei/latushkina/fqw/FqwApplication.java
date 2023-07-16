@@ -1,5 +1,6 @@
 package ru.mpei.latushkina.fqw;
 
+
 import org.springframework.boot.SpringApplication;
 
 public class FqwApplication {
