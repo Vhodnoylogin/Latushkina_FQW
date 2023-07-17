@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="true" scanPeriod="30 seconds" debug="false">
+
+    <!-- Консольный аппендер -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Файловый аппендер для ошибок -->
+    <appender name="errorFile" class="ch.qos.logback.core.FileAppender">
+        <file>./logs/errors/file.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Аппендер, который ничего не делает -->
+    <appender name="null" class="ch.qos.logback.core.helpers.NOPAppender"/>
+
+
+    <!-- Логгеры -->
+    <root level="INFO">
+        <appender-ref ref="console"/>
+        <!--        <appender-ref ref="errorFile"/>-->
+    </root>
+    <logger name="ru.liga.prerevolutionarytinder" level="DEBUG">
+        <appender-ref ref="null"/>
+        <appender-ref ref="errorFile"/>
+        <appender-ref ref="console"/>
+    </logger>
+
+    <logger name="org.hibernate.engine.internal.StatisticalLoggingSessionEventListener" level="OFF"/>
+
+    <logger name="org.hibernate.SQL" level="OFF"/>
+
+</configuration>
