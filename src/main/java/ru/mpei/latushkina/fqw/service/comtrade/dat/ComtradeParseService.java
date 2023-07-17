@@ -8,7 +8,10 @@ import ru.mpei.latushkina.fqw.model.dto.point.Point;
 import ru.mpei.latushkina.fqw.model.dto.point.Source;
 import ru.mpei.latushkina.fqw.util.ParserUtil;
 
+import java.io.BufferedReader;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,11 +24,10 @@ public class ComtradeParseService {
     private final static int SIXTEEN = FOUR * FOUR;
 
     @SneakyThrows
-    private static List<ChartPoint> binaryRead(InputStream inputStream, CfgFile cfg) {
+    private static Map<Source, List<Point>> binaryRead(InputStream inputStream, CfgFile cfg) {
         byte[] bytes = inputStream.readAllBytes();
         inputStream.close();
 
-        List<ChartPoint> measurements = new ArrayList<>();
         int i = 0;
 
         Map<Source, List<Point>> channelPoints = new HashMap<>();
@@ -62,14 +64,57 @@ public class ComtradeParseService {
             }
         }
 
-        return ChartPoint.fromMap(channelPoints);
+        return channelPoints;
+    }
+
+    @SneakyThrows
+    private static Map<Source, List<Point>> asciiRead(InputStream inputStream, CfgFile cfg) {
+        try (BufferedReader bufferedReader = new BufferedReader(
+                new InputStreamReader(inputStream, StandardCharsets.UTF_8.newDecoder()))) {
+            Map<Source, List<Point>> channelPoints = new HashMap<>();
+
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                String[] splitLine = line.split(",");
+                int offset = 0;
+
+                offset++;
+                var time = Double.parseDouble(splitLine[offset]) / 1_000_000;
+
+                offset++;
+
+                for (int i = 0; i < cfg.getAnalogChannels().size(); i++) {
+                    var aCh = cfg.getAnalogChannels().get(i);
+
+                    var name = aCh.getSource(null);
+                    var val = aCh.getCurrentValue(Double.parseDouble(splitLine[i + offset]));
+
+                    var points = channelPoints.getOrDefault(name, new ArrayList<>());
+                    points.add(new Point(time, val));
+                    channelPoints.put(name, points);
+                }
+                offset = offset + cfg.getAnalogChannels().size();
+                for (int i = 0; i < cfg.getDigitalChannels().size(); i++) {
+                    var dCh = cfg.getDigitalChannels().get(i);
+
+                    var name = dCh.getSource(null);
+                    var val = Integer.parseInt(splitLine[i + offset]) == 1 ? 1. : 0.;
+
+                    var points = channelPoints.getOrDefault(name, new ArrayList<>());
+                    points.add(new Point(time, val));
+                    channelPoints.put(name, points);
+                }
+            }
+            return channelPoints;
+        }
     }
 
     public List<ChartPoint> parseComtradeFile(InputStream cfgFile, InputStream datFile) {
         var cfg = CfgFile.readCfg(cfgFile);
-        if (cfg.getFileType() == CfgFile.FileType.BINARY) {
-            return binaryRead(datFile, cfg);
-        }
-        return List.of();
+
+        var res = cfg.getFileType() == CfgFile.FileType.BINARY ?
+                binaryRead(datFile, cfg)
+                : asciiRead(datFile, cfg);
+        return ChartPoint.fromMap(res);
     }
 }
