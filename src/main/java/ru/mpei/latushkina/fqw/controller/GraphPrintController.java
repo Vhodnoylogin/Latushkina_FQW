@@ -39,7 +39,7 @@ public class GraphPrintController {
             @RequestParam(defaultValue = "-1.0") double timeBegin,
             @RequestParam(defaultValue = "-1.0") double timeEnd,
             @RequestParam String[] sources) {
-        var sourceList = Arrays.stream(sources).map(Source::new).toList();
+        var sourceList = Arrays.stream(sources).map(Source::makeSource).toList();
 
         String res;
         if (timeBegin < 0 && timeEnd < 0) {

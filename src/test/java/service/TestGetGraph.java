@@ -33,8 +33,8 @@ public class TestGetGraph {
     public void testYourService() {
         comtradeUploadService.upload(null, null);
         var res = graphService.getGraphPointsBySource(List.of(
-                new Source("src1"),
-                new Source("src2")
+                Source.makeSource("1_src1"),
+                Source.makeSource("2_src2")
         ));
 
 //        log.info("Base64 = {}", res);

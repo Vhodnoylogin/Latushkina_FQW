@@ -96,7 +96,7 @@ public class FourierFilterService {
     public List<ChartPoint> applyFilter(List<ChartPoint> points) {
         return points.stream()
                 .map(x -> new ChartPoint(
-                        new Source(x.getSource().getDescription() + "_RMS"),
+                        Source.makeSource(x.getSource().getDescription() + "_RMS"),
                         applyPointFilter(x.getPoints(), cutOffFrequency)
                 ))
                 .toList();

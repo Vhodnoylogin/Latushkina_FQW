@@ -18,7 +18,7 @@ public class ChartPointMapping implements DtoEntityMapper<List<ChartPoint>, List
     public static List<ChartPoint> entityToCartPoint(List<ChartPointEntity> listEntities) {
         Map<Source, List<Point>> dataPoints = new HashMap<>();
         for (ChartPointEntity chartPointEntity : listEntities) {
-            var source = new Source(chartPointEntity.getSource());
+            var source = Source.makeSource(chartPointEntity.getSource());
             var point = new Point(chartPointEntity.getTime(), chartPointEntity.getValue());
 
             var list = dataPoints.getOrDefault(source, new ArrayList<>());
@@ -40,7 +40,7 @@ public class ChartPointMapping implements DtoEntityMapper<List<ChartPoint>, List
                 )
                 .map(x -> new ChartPointEntity(
                         null,
-                        x.getFirst().getName(),
+                        x.getFirst().getDescription(),
                         x.getSecond().getTime(),
                         x.getSecond().getValue()
                 ))
