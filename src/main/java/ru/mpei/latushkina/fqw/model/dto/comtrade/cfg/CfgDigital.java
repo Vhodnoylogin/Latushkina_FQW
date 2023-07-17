@@ -2,10 +2,11 @@ package ru.mpei.latushkina.fqw.model.dto.comtrade.cfg;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.mpei.latushkina.fqw.model.dto.point.Source;
 
 @Data
 @NoArgsConstructor
-public class CfgDigital {
+public class CfgDigital implements Cfg {
     private static String digitalSuffix = "BOOL";
     private int channelNumber;
     private String channelId;
@@ -19,5 +20,15 @@ public class CfgDigital {
         cfgDigital.setNormalState(!line[2].equals("") ? Integer.parseInt(line[2]) : 0);
 
         return cfgDigital;
+    }
+
+    @Override
+    public Source getSource(Double input) {
+        return Source.makeSource(getChannelId());
+    }
+
+    @Override
+    public Double getCurrentValue(Double input) {
+        return input;
     }
 }

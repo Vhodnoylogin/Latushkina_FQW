@@ -6,7 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "${mydb.tables.chart-point-table-name}")
+//@Table(name = "${mydb.tables.chartpoint}")
+@Table(name = "chart_point")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

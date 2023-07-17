@@ -2,10 +2,11 @@ package ru.mpei.latushkina.fqw.model.dto.comtrade.cfg;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import ru.mpei.latushkina.fqw.model.dto.point.Source;
 
 @Data
 @NoArgsConstructor
-public class CfgAnalog {
+public class CfgAnalog implements Cfg {
     private int channelNumber;
     private String channelId;
     private String phaseId;
@@ -38,6 +39,19 @@ public class CfgAnalog {
         cfgAnalog.setValue(line[12].contains("S") ? CfgAnalog.Value.S : CfgAnalog.Value.P);
 
         return cfgAnalog;
+    }
+
+    @Override
+    public Source getSource(Double input) {
+        return Source.makeSource(
+                String.join(Cfg.DELIMITER, String.valueOf(channelNumber), component, unit, phaseId)
+        );
+    }
+
+    @Override
+    public Double getCurrentValue(Double input) {
+        return (input * getA() + getB()) *
+                (getValue() == CfgAnalog.Value.S ? getPrimary() / getSecondary() : 1);
     }
 
     public enum Value {
